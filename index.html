@@ -1,1069 +1,154 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>アメリカ旅行 2026</title>
-  <style>
-    :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --card-soft:#f9fafc;
-      --text:#1f2937;
-      --sub:#6b7280;
-      --muted:#9ca3af;
-      --line:#d9dee8;
-      --line-soft:#e8ecf3;
-      --green:#1D9E75;
-      --green-soft:#e7f7f1;
-      --pink:#D4537E;
-      --pink-soft:#fdeef4;
-      --blue:#378ADD;
-      --blue-soft:#eaf3fc;
-      --purple:#7F77DD;
-      --purple-soft:#f0efff;
-      --orange:#EF9F27;
-      --orange-soft:#fff4e2;
-      --graydot:#888780;
-      --shadow:0 6px 20px rgba(27, 39, 51, 0.08);
-      --shadow-soft:0 2px 8px rgba(27, 39, 51, 0.05);
-      --radius-sm:10px;
-      --radius-md:14px;
-      --radius-lg:20px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html,body{
-      background:var(--bg);
-      color:var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Hiragino Sans",
-        "Hiragino Kaku Gothic ProN",
-        "Noto Sans JP",
-        sans-serif;
-      font-size:16px;
-      line-height:1.5;
-    }
-
-    body{
-      padding:
-        max(12px, env(safe-area-inset-top))
-        12px
-        max(16px, env(safe-area-inset-bottom))
-        12px;
-    }
-
-    .app{
-      max-width:460px;
-      margin:0 auto;
-    }
-
-    .shell{
-      background:linear-gradient(180deg,#ffffff 0%, #f9fbff 100%);
-      border:1px solid var(--line-soft);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .topbar{
-      padding:18px 16px 14px;
-      background:linear-gradient(180deg,#ffffff 0%, #f7f9fd 100%);
-      border-bottom:1px solid var(--line-soft);
-      position:sticky;
-      top:0;
-      z-index:30;
-      backdrop-filter:blur(10px);
-    }
-
-    .hdr{
-      text-align:center;
-      margin-bottom:14px;
-    }
-
-    .hdr h1{
-      font-size:26px;
-      font-weight:700;
-      color:var(--text);
-      letter-spacing:0.01em;
-    }
-
-    .hdr p{
-      font-size:15px;
-      color:var(--sub);
-      margin-top:4px;
-    }
-
-    .mode-sw{
-      display:flex;
-      gap:8px;
-      background:#eef2f7;
-      padding:6px;
-      border-radius:16px;
-      border:1px solid var(--line-soft);
-      box-shadow:inset 0 1px 2px rgba(0,0,0,0.03);
-    }
-
-    .mode-btn{
-      flex:1;
-      padding:11px 8px;
-      font-size:15px;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-      background:transparent;
-      color:var(--sub);
-      border-radius:12px;
-      transition:all 0.18s ease;
-    }
-
-    .mode-btn.active{
-      background:var(--green);
-      color:#fff;
-      box-shadow:0 4px 10px rgba(29,158,117,0.22);
-    }
-
-    .content{
-      padding:14px;
-    }
-
-    .pane{
-      display:none;
-    }
-
-    .pane.active{
-      display:block;
-    }
-
-    .tabs{
-      display:grid;
-      grid-template-columns:repeat(5, minmax(0,1fr));
-      gap:8px;
-      margin-bottom:14px;
-    }
-
-    .tab{
-      min-height:46px;
-      padding:8px 4px;
-      border-radius:12px;
-      font-size:14px;
-      font-weight:700;
-      border:1px solid var(--line);
-      cursor:pointer;
-      background:#fff;
-      color:var(--sub);
-      transition:all 0.15s ease;
-      text-align:center;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .tab.active{
-      background:var(--green);
-      color:#fff;
-      border-color:var(--green);
-      box-shadow:0 4px 10px rgba(29,158,117,0.20);
-    }
-
-    .dtabs{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:8px;
-      margin-bottom:14px;
-    }
-
-    .dtab{
-      min-height:50px;
-      padding:8px 4px;
-      border-radius:12px;
-      font-size:14px;
-      font-weight:700;
-      border:1px solid var(--line);
-      cursor:pointer;
-      background:#fff;
-      color:var(--sub);
-      transition:all 0.15s ease;
-      text-align:center;
-      line-height:1.25;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .dtab small{
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .dtab.active{
-      background:var(--pink);
-      color:#fff;
-      border-color:var(--pink);
-      box-shadow:0 4px 10px rgba(212,83,126,0.22);
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--line-soft);
-      border-radius:20px;
-      padding:18px 16px;
-      display:none;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .card.active{
-      display:block;
-    }
-
-    .dbadge{
-      display:inline-block;
-      background:var(--green-soft);
-      color:#0F6E56;
-      font-size:14px;
-      font-weight:800;
-      padding:6px 14px;
-      border-radius:999px;
-      margin-bottom:16px;
-      border:1px solid #cceee1;
-    }
-
-    .slabel{
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      letter-spacing:0.08em;
-      margin:16px 0 10px;
-    }
-
-    .ev{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      margin-bottom:12px;
-    }
-
-    .et{
-      font-size:14px;
-      font-weight:700;
-      color:var(--sub);
-      min-width:52px;
-      padding-top:1px;
-    }
-
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:#5DCAA5;
-      flex-shrink:0;
-      margin-top:6px;
-      box-shadow:0 0 0 4px rgba(93,202,165,0.12);
-    }
-
-    .dot.am{background:var(--orange); box-shadow:0 0 0 4px rgba(239,159,39,0.12);}
-    .dot.bl{background:var(--blue); box-shadow:0 0 0 4px rgba(55,138,221,0.12);}
-    .dot.pu{background:var(--purple); box-shadow:0 0 0 4px rgba(127,119,221,0.12);}
-    .dot.pk{background:var(--pink); box-shadow:0 0 0 4px rgba(212,83,126,0.12);}
-    .dot.gy{background:var(--graydot); box-shadow:0 0 0 4px rgba(136,135,128,0.12);}
-
-    .en{
-      font-size:17px;
-      font-weight:700;
-      color:var(--text);
-      line-height:1.45;
-    }
-
-    .es{
-      font-size:14px;
-      color:var(--sub);
-      margin-top:3px;
-      line-height:1.45;
-    }
-
-    .hotel{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-top:16px;
-      padding-top:14px;
-      border-top:1px solid var(--line-soft);
-      font-size:15px;
-      color:var(--sub);
-      font-weight:700;
-    }
-
-    .tip{
-      background:linear-gradient(180deg,#effbf6 0%, #e6f7f0 100%);
-      border-radius:16px;
-      padding:14px;
-      margin-top:16px;
-      border:1px solid #caecdf;
-    }
-
-    .tip-lbl{
-      font-size:12px;
-      font-weight:800;
-      color:#0F6E56;
-      margin-bottom:8px;
-    }
-
-    .tip-item{
-      font-size:14px;
-      color:#085041;
-      line-height:1.7;
-      padding:6px 0;
-      border-bottom:1px solid #bde7d6;
-    }
-
-    .tip-item:last-child{
-      border-bottom:none;
-    }
-
-    .tip-name{
-      font-weight:800;
-    }
-
-    .divider{
-      height:1px;
-      background:var(--line-soft);
-      margin:16px 0;
-    }
-
-    .memo-item{
-      font-size:15px;
-      color:var(--text);
-      padding:10px 0;
-      border-bottom:1px solid var(--line-soft);
-      display:flex;
-      gap:8px;
-      align-items:flex-start;
-    }
-
-    .memo-item:last-child{
-      border-bottom:none;
-    }
-
-    .mdot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--purple);
-      flex-shrink:0;
-      margin-top:7px;
-    }
-
-    .msub{
-      font-size:13px;
-      color:var(--sub);
-      margin-top:2px;
-      line-height:1.55;
-    }
-
-    .chk-item{
-      font-size:15px;
-      color:var(--text);
-      padding:10px 0;
-      border-bottom:1px solid var(--line-soft);
-      display:flex;
-      gap:10px;
-      align-items:center;
-      cursor:pointer;
-    }
-
-    .chk-item:last-child{
-      border-bottom:none;
-    }
-
-    .chkbox{
-      width:20px;
-      height:20px;
-      border-radius:6px;
-      border:2px solid #b8c2d1;
-      flex-shrink:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#fff;
-    }
-
-    .chkbox.on{
-      background:var(--green);
-      border-color:var(--green);
-    }
-
-    .chkmark{
-      color:#fff;
-      font-size:12px;
-      font-weight:800;
-      display:none;
-    }
-
-    .chkbox.on .chkmark{
-      display:block;
-    }
-
-    .done{
-      text-decoration:line-through;
-      color:var(--muted);
-    }
-
-    .d-hdr{
-      border-radius:18px;
-      padding:18px 16px;
-      margin-bottom:16px;
-      text-align:center;
-      border:1px solid transparent;
-    }
-
-    .d-hdr.dca{
-      background:var(--pink-soft);
-      border-color:#f6c8d8;
-    }
-
-    .d-hdr.dlp{
-      background:var(--blue-soft);
-      border-color:#cfe3f8;
-    }
-
-    .d-hdr.sw{
-      background:var(--purple-soft);
-      border-color:#d8d5ff;
-    }
-
-    .d-hdr h2{
-      font-size:20px;
-      font-weight:800;
-      margin-bottom:4px;
-    }
-
-    .d-hdr.dca h2{color:#72243E;}
-    .d-hdr.dlp h2{color:#0C447C;}
-    .d-hdr.sw h2{color:#3C3489;}
-
-    .d-hdr p{
-      font-size:14px;
-      font-weight:600;
-    }
-
-    .d-hdr.dca p{color:#993556;}
-    .d-hdr.dlp p{color:#185FA5;}
-    .d-hdr.sw p{color:#534AB7;}
-
-    .ev-block{
-      background:var(--card);
-      border:1px solid var(--line-soft);
-      border-radius:16px;
-      padding:14px 14px;
-      margin-bottom:10px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .ev-block.food{
-      border-left:5px solid var(--orange);
-    }
-
-    .ev-block.show{
-      border-left:5px solid var(--purple);
-    }
-
-    .ev-block.sw{
-      border-left:5px solid #534AB7;
-    }
-
-    .ev-block.special{
-      border-left:5px solid var(--pink);
-    }
-
-    .ev-time{
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-
-    .ev-title{
-      font-size:16px;
-      font-weight:800;
-      color:var(--text);
-      line-height:1.45;
-      margin-bottom:4px;
-    }
-
-    .ev-desc{
-      font-size:14px;
-      color:var(--sub);
-      line-height:1.7;
-    }
-
-    .ev-tags{
-      display:flex;
-      gap:6px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-
-    .tag{
-      font-size:12px;
-      font-weight:800;
-      padding:4px 9px;
-      border-radius:999px;
-    }
-
-    .tag-warn{background:var(--orange-soft);color:#854F0B;}
-    .tag-tip{background:var(--green-soft);color:#0F6E56;}
-    .tag-star{background:var(--purple-soft);color:#534AB7;}
-    .tag-res{background:var(--blue-soft);color:#185FA5;}
-    .tag-sw{background:var(--purple-soft);color:#3C3489;}
-
-    .res-item{
-      background:var(--card);
-      border:1px solid var(--line-soft);
-      border-radius:16px;
-      padding:14px;
-      margin-bottom:10px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .res-top{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:6px;
-    }
-
-    .res-icon{
-      font-size:20px;
-    }
-
-    .res-name{
-      font-size:16px;
-      font-weight:800;
-      color:var(--text);
-      flex:1;
-    }
-
-    .res-status{
-      font-size:12px;
-      font-weight:800;
-      padding:4px 9px;
-      border-radius:999px;
-    }
-
-    .st-done{background:var(--green-soft);color:#0F6E56;}
-    .st-todo{background:var(--orange-soft);color:#854F0B;}
-    .st-day{background:var(--blue-soft);color:#185FA5;}
-
-    .res-sub{
-      font-size:14px;
-      color:var(--sub);
-      line-height:1.75;
-    }
-
-    .res-price,
-    .res-free{
-      display:inline-block;
-      font-size:13px;
-      font-weight:800;
-      padding:4px 10px;
-      border-radius:999px;
-      margin-top:8px;
-    }
-
-    .res-price{
-      background:var(--orange-soft);
-      color:#854F0B;
-    }
-
-    .res-free{
-      background:var(--green-soft);
-      color:#0F6E56;
-    }
-
-    .tip-block{
-      background:var(--card-soft);
-      border-radius:16px;
-      padding:14px;
-      margin-bottom:10px;
-      border:1px solid var(--line-soft);
-      box-shadow:var(--shadow-soft);
-    }
-
-    .tip-title{
-      font-size:15px;
-      font-weight:800;
-      color:var(--text);
-      margin-bottom:6px;
-    }
-
-    .tip-body{
-      font-size:14px;
-      color:var(--sub);
-      line-height:1.75;
-    }
-
-    .sr-table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:10px;
-      font-size:13px;
-      background:#fff;
-      border-radius:12px;
-      overflow:hidden;
-    }
-
-    .sr-table th{
-      padding:8px;
-      text-align:left;
-      color:var(--sub);
-      border-bottom:1px solid var(--line-soft);
-      background:#f8fafc;
-      font-weight:800;
-    }
-
-    .sr-table td{
-      padding:8px;
-      border-bottom:1px solid var(--line-soft);
-      color:var(--text);
-    }
-
-    .wait-long{color:#D85A30;font-weight:800;}
-    .wait-short{color:#1D9E75;font-weight:800;}
-
-    .section-hdr{
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      letter-spacing:0.08em;
-      margin:18px 0 10px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .section-hdr::after{
-      content:'';
-      flex:1;
-      height:1px;
-      background:var(--line-soft);
-    }
-
-    .jump-card{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:11px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      border:1px solid;
-      font-size:14px;
-      font-weight:800;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .jump-card.pink{
-      background:var(--pink-soft);
-      border-color:#ED93B1;
-      color:#72243E;
-    }
-
-    .jump-card.purple{
-      background:var(--purple-soft);
-      border-color:#AFA9EC;
-      color:#3C3489;
-    }
-
-    @media (max-width:420px){
-      .tabs{
-        grid-template-columns:repeat(5, minmax(0,1fr));
-      }
-      .tab{
-        font-size:13px;
-        min-height:44px;
-      }
-      .dtab{
-        font-size:13px;
-      }
-      .hdr h1{
-        font-size:24px;
-      }
-      .en{
-        font-size:16px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA旅行 2026</title>
+
+<style>
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  background:#f5f7fb;
+  margin:0;
+  padding:10px;
+}
+
+.app{max-width:420px;margin:0 auto;}
+
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.item{margin-bottom:14px;}
+
+.en{font-weight:700;font-size:16px;}
+
+.actions{margin-top:6px;}
+
+.btn{
+  display:inline-block;
+  margin:2px 4px 0 0;
+  padding:6px 10px;
+  font-size:13px;
+  font-weight:700;
+  border-radius:8px;
+  text-decoration:none;
+  color:#fff;
+}
+
+.map{background:#378ADD;}
+.route{background:#1D9E75;}
+.uber{background:#000;}
+
+.distance{
+  font-size:12px;
+  color:#666;
+  margin-top:4px;
+}
+</style>
 </head>
+
 <body>
-  <div class="app">
-    <div class="shell">
-      <div class="topbar">
-        <div class="hdr">
-          <h1>アメリカ旅行 2026</h1>
-          <p>4/28 – 5/5 · ロサンゼルス</p>
-        </div>
+<div class="app">
 
-        <div class="mode-sw">
-          <button class="mode-btn active" onclick="switchMode('trip')">旅行スケジュール</button>
-          <button class="mode-btn" onclick="switchMode('disney')">ディズニーしおり</button>
-        </div>
-      </div>
+<div class="card">
+<div class="title">4/28 ダウンタウン</div>
 
-      <div class="content">
-        <!-- ===== TRIP MODE ===== -->
-        <div class="pane active" id="pane-trip">
-          <div class="tabs">
-            <button class="tab active" onclick="showTrip(0)">4/28</button>
-            <button class="tab" onclick="showTrip(1)">4/29</button>
-            <button class="tab" onclick="showTrip(2)">4/30</button>
-            <button class="tab" onclick="showTrip(3)">5/1</button>
-            <button class="tab" onclick="showTrip(4)">5/2</button>
-            <button class="tab" onclick="showTrip(5)">5/3</button>
-            <button class="tab" onclick="showTrip(6)">5/4・5/5</button>
-            <button class="tab" onclick="showTrip(7)">やりたいこと</button>
-            <button class="tab" onclick="showTrip(8)">持ち物</button>
-          </div>
+<div class="item" data-lat="34.0544" data-lng="-118.2509">
+<div class="en">The Broad</div>
+<div class="actions">
+<a class="btn map" href="https://maps.google.com/?q=The+Broad+Los+Angeles">📍地図</a>
+<a class="btn route" onclick="route(34.0544,-118.2509)">🚗ナビ</a>
+<a class="btn uber" href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=34.0544&dropoff[longitude]=-118.2509">🚕Uber</a>
+</div>
+<div class="distance">距離: 計算中...</div>
+</div>
 
-          <div class="card active" id="t0">
-            <div class="dbadge">4月28日（火）</div>
-            <div class="slabel">フライト</div>
-            <div class="ev"><div class="et">14:35</div><div class="dot bl"></div><div><div class="en">成田 出発</div></div></div>
-            <div class="ev"><div class="et">8:25</div><div class="dot bl"></div><div><div class="en">ロサンゼルス 到着</div></div></div>
+<div class="item" data-lat="34.0739" data-lng="-118.2400">
+<div class="en">Dodger Stadium</div>
+<div class="actions">
+<a class="btn map" href="https://maps.google.com/?q=Dodger+Stadium">📍地図</a>
+<a class="btn route" onclick="route(34.0739,-118.2400)">🚗ナビ</a>
+<a class="btn uber" href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=34.0739&dropoff[longitude]=-118.2400">🚕Uber</a>
+</div>
+<div class="distance">距離: 計算中...</div>
+</div>
 
-            <div class="slabel">午前 — ダウンタウン</div>
-            <div class="ev"><div class="et"></div><div class="dot gy"></div><div><div class="en">ダウンタウンへ移動</div></div></div>
-            <div class="ev"><div class="et">11:00</div><div class="dot"></div><div><div class="en">ブロード 入場</div></div></div>
-            <div class="ev"><div class="et">11:30</div><div class="dot"></div><div><div class="en">インフィニティミラールーム</div></div></div>
+</div>
 
-            <div class="slabel">午後 — ドジャースタジアム</div>
-            <div class="ev"><div class="et">15:30</div><div class="dot am"></div><div><div class="en">ドジャース プレゲームツアー</div></div></div>
-            <div class="ev"><div class="et">19:10</div><div class="dot am"></div><div><div class="en">ドジャース 試合</div></div></div>
+<div class="card">
+<div class="title">4/30 ディズニー</div>
 
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>The O Hotel</span></div>
+<div class="item" data-lat="33.8054" data-lng="-117.9189">
+<div class="en">Disney California Adventure</div>
+<div class="actions">
+<a class="btn map" href="https://maps.google.com/?q=Disney+California+Adventure+Park">📍地図</a>
+<a class="btn route" onclick="route(33.8054,-117.9189)">🚗ナビ</a>
+<a class="btn uber" href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=33.8054&dropoff[longitude]=-117.9189">🚕Uber</a>
+</div>
+<div class="distance">距離: 計算中...</div>
+</div>
 
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Grand Central Market</span> — ブロードから徒歩3分。タコス・ジュースが揃う屋台市場。到着後のランチに最適。</div>
-              <div class="tip-item"><span class="tip-name">Angel City Brewery</span> — ドジャースタジアム近く。試合前の地ビールはここで。</div>
-              <div class="tip-item"><span class="tip-name">Clifton's Republic</span> — ダウンタウンの老舗バー&レストラン。アメリカンな雰囲気。</div>
-            </div>
-          </div>
+</div>
 
-          <div class="card" id="t1">
-            <div class="dbadge">4月29日（水）</div>
-            <div class="slabel">午前 — ドジャースタジアム</div>
-            <div class="ev"><div class="et">12:10</div><div class="dot am"></div><div><div class="en">ドジャース 試合</div></div></div>
+<div class="card">
+<div class="title">5/3 サンタモニカ</div>
 
-            <div class="slabel">午後 — ダウンタウン</div>
-            <div class="ev"><div class="et"></div><div class="dot pu"></div><div><div class="en">レイカーズ 試合</div><div class="es">Crypto.com Arena</div></div></div>
+<div class="item" data-lat="34.0094" data-lng="-118.4973">
+<div class="en">Santa Monica Pier</div>
+<div class="actions">
+<a class="btn map" href="https://maps.google.com/?q=Santa+Monica+Pier">📍地図</a>
+<a class="btn route" onclick="route(34.0094,-118.4973)">🚗ナビ</a>
+<a class="btn uber" href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=34.0094&dropoff[longitude]=-118.4973">🚕Uber</a>
+</div>
+<div class="distance">距離: 計算中...</div>
+</div>
 
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>The O Hotel</span></div>
+</div>
 
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Bottega Louie</span> — Crypto.com Arenaから徒歩10分。試合前に人気のイタリアン。マカロンも有名。</div>
-              <div class="tip-item"><span class="tip-name">Last Bookstore</span> — ダウンタウンの巨大古書店。ユニークな観光スポット。</div>
-              <div class="tip-item"><span class="tip-name">Howlin' Ray's</span> — ナッシュビル系ホットチキンの名店。行列必至。</div>
-            </div>
-          </div>
+</div>
 
-          <div class="card" id="t2">
-            <div class="dbadge">4月30日（木）</div>
-            <div class="slabel">終日 — アナハイム</div>
-            <div class="ev"><div class="et"></div><div class="dot gy"></div><div><div class="en">アナハイムへ移動</div></div></div>
-            <div class="ev"><div class="et">午前</div><div class="dot pk"></div><div><div class="en">ディズニーカリフォルニアアドベンチャーパーク</div></div></div>
-            <div class="ev"><div class="et">午後</div><div class="dot pk"></div><div><div class="en">ディズニーカリフォルニアアドベンチャーパーク</div></div></div>
+<script>
+// ナビ（現在地→目的地）
+function route(lat,lng){
+  window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`);
+}
 
-            <div style="margin-top:12px;">
-              <div class="jump-card pink" onclick="switchMode('disney');showDisney(0);">
-                <span style="font-size:15px;">📋</span>
-                <span>ディズニーしおりを見る（DAY 1 DCA）</span>
-              </div>
-            </div>
+// 距離計算
+navigator.geolocation.getCurrentPosition(pos=>{
+  const userLat = pos.coords.latitude;
+  const userLng = pos.coords.longitude;
 
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>Hotel Lulu</span></div>
+  document.querySelectorAll('.item').forEach(el=>{
+    const lat = parseFloat(el.dataset.lat);
+    const lng = parseFloat(el.dataset.lng);
 
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Downtown Disney</span> — パーク隣接の無料エリア。お土産・食事が充実。</div>
-              <div class="tip-item"><span class="tip-name">Ballast Point Brewing</span> — Downtown Disney内のクラフトビール醸造所。</div>
-              <div class="tip-item"><span class="tip-name">Anaheim Packing House</span> — 車で5分のローカル人気フードホール。</div>
-            </div>
-          </div>
+    const d = distance(userLat,userLng,lat,lng);
+    el.querySelector('.distance').innerText = `距離: ${d.toFixed(1)} km`;
+  });
+});
 
-          <div class="card" id="t3">
-            <div class="dbadge">5月1日（金）</div>
-            <div class="slabel">終日 — ディズニーランド</div>
-            <div class="ev"><div class="et">午前</div><div class="dot pk"></div><div><div class="en">ディズニーランドパーク</div></div></div>
-            <div class="ev"><div class="et">午後</div><div class="dot pk"></div><div><div class="en">ディズニーランドパーク</div></div></div>
-            <div class="ev"><div class="et">20:25</div><div class="dot pu"></div><div><div class="en">ライトセイバー体験</div><div class="es">Savi's Workshop — Galaxy's Edge</div></div></div>
+// 距離関数
+function distance(lat1,lon1,lat2,lon2){
+  const R=6371;
+  const dLat=(lat2-lat1)*Math.PI/180;
+  const dLon=(lon2-lon1)*Math.PI/180;
+  const a=Math.sin(dLat/2)*Math.sin(dLat/2)+
+          Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+          Math.sin(dLon/2)*Math.sin(dLon/2);
+  return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+</script>
 
-            <div style="margin-top:12px;">
-              <div class="jump-card purple" onclick="switchMode('disney');showDisney(1);">
-                <span style="font-size:15px;">📋</span>
-                <span>ディズニーしおりを見る（DAY 2 DLP）</span>
-              </div>
-            </div>
-
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>Hotel Lulu</span></div>
-
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Oga's Cantina（パーク内）</span> — Galaxy's Edgeのバー。スター・ウォーズの宇宙カクテル。</div>
-              <div class="tip-item"><span class="tip-name">Ralph Brennan's Jazz Kitchen</span> — Downtown Disney。ニューオーリンズ料理で締めくくり。</div>
-            </div>
-          </div>
-
-          <div class="card" id="t4">
-            <div class="dbadge">5月2日（土）</div>
-            <div class="slabel">午前 — アナハイム → ダウンタウン</div>
-            <div class="ev"><div class="et"></div><div class="dot am"></div><div><div class="en">エンゼルスタジアム 見学</div></div></div>
-            <div class="ev"><div class="et"></div><div class="dot gy"></div><div><div class="en">ダウンタウンへ移動</div></div></div>
-
-            <div class="slabel">午後 — エクスポジションパーク</div>
-            <div class="ev"><div class="et"></div><div class="dot"></div><div><div class="en">カリフォルニアサイエンスセンター</div></div></div>
-
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>Kawada Hotel</span></div>
-
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Natural History Museum of LA</span> — サイエンスセンターから徒歩5分。恐竜の化石・隕石が見られる。</div>
-              <div class="tip-item"><span class="tip-name">SOFi Stadium（外観）</span> — NFL本拠地、外からでも迫力満点。</div>
-              <div class="tip-item"><span class="tip-name">Mercado La Paloma</span> — 地元メキシコ料理のフードホール。</div>
-            </div>
-          </div>
-
-          <div class="card" id="t5">
-            <div class="dbadge">5月3日（日）</div>
-            <div class="slabel">午前 — ミッドシティ → サンタモニカ</div>
-            <div class="ev"><div class="et"></div><div class="dot gy"></div><div><div class="en">サンタモニカへ移動</div></div></div>
-            <div class="ev"><div class="et"></div><div class="dot"></div><div><div class="en">ザ・グローブ</div><div class="es">ショッピングモール</div></div></div>
-            <div class="ev"><div class="et"></div><div class="dot"></div><div><div class="en">ロサンゼルスカウンティ美術館</div></div></div>
-            <div class="ev"><div class="et"></div><div class="dot"></div><div><div class="en">ピーターセン自動車博物館</div></div></div>
-            <div class="ev"><div class="et"></div><div class="dot"></div><div><div class="en">ハマーミュージアム</div></div></div>
-
-            <div class="slabel">午後 — サンタモニカ</div>
-            <div class="ev"><div class="et"></div><div class="dot am"></div><div><div class="en">ルート66 看板見学</div><div class="es">サンタモニカ桟橋の東端</div></div></div>
-
-            <div class="hotel"><span style="font-size:17px;">🏨</span><span>Santa Monica Hotel</span></div>
-
-            <div class="tip">
-              <div class="tip-lbl">近くのおすすめ</div>
-              <div class="tip-item"><span class="tip-name">Santa Monica Pier</span> — ルート66看板の隣。夕暮れの景色が最高。</div>
-              <div class="tip-item"><span class="tip-name">Gjusta</span> — ベニスビーチ近くの大人気ベーカリー＆デリ。</div>
-              <div class="tip-item"><span class="tip-name">Abbot Kinney Blvd</span> — ヴェニスのおしゃれ通り。カフェ・セレクトショップが並ぶ。</div>
-            </div>
-          </div>
-
-          <div class="card" id="t6">
-            <div class="dbadge">5月4日（月）出発</div>
-            <div class="slabel">午前</div>
-            <div class="ev"><div class="et"></div><div class="dot gy"></div><div><div class="en">タクシーで空港へ移動</div></div></div>
-            <div class="ev"><div class="et">10:25</div><div class="dot bl"></div><div><div class="en">ロサンゼルス空港 出発</div></div></div>
-
-            <div class="divider"></div>
-
-            <div class="dbadge" style="background:var(--blue-soft);color:#185FA5;border-color:#cfe3f8;">5月5日（火）帰国</div>
-            <div class="slabel">午後</div>
-            <div class="ev"><div class="et">14:10</div><div class="dot bl"></div><div><div class="en">成田 到着</div></div></div>
-
-            <div class="tip">
-              <div class="tip-lbl">空港周辺のおすすめ</div>
-              <div class="tip-item"><span class="tip-name">In-N-Out Burger（LAX近く）</span> — LAを締めくくる定番ファストフード。最後にぜひ。</div>
-              <div class="tip-item"><span class="tip-name">LAX 国際線ターミナル</span> — お土産コーナーが充実。残ったドルの使い道にも。</div>
-            </div>
-          </div>
-
-          <div class="card" id="t7">
-            <div class="dbadge" style="background:var(--purple-soft);color:#534AB7;border-color:#d8d5ff;">やりたいこと</div>
-            <div style="margin-top:12px;">
-              <div class="memo-item"><div class="mdot"></div><div><div>Waymo（無人タクシー）</div><div class="msub">アプリ「Waymo One」で事前登録が必要</div></div></div>
-              <div class="memo-item"><div class="mdot"></div><div><div>MJ THE MUSICAL</div><div class="msub">5/2夜を狙って。要事前チケット確認</div></div></div>
-              <div class="memo-item"><div class="mdot"></div><div><div>インテュイットドーム</div><div class="msub">クリッパーズの新アリーナ（イングルウッド）</div></div></div>
-              <div class="memo-item"><div class="mdot"></div><div><div>SOFi Stadium</div><div class="msub">5/2サイエンスセンターからも近い</div></div></div>
-              <div class="memo-item"><div class="mdot"></div><div><div>ロサンゼルスメモリアルコロシアム</div><div class="msub">SOFiの隣、USC構内</div></div></div>
-            </div>
-          </div>
-
-          <div class="card" id="t8">
-            <div class="dbadge" style="background:var(--orange-soft);color:#854F0B;border-color:#f4dcb2;">持ち物チェック</div>
-            <div style="margin-top:12px;">
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>パスポート・ビザ</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>マイナンバーカード（写真）</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>携帯</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>サンダル</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>グローブ</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>ドル（現金）</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>充電器</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>イヤホン</span></div>
-              <div class="chk-item" onclick="tgl(this)"><div class="chkbox"><span class="chkmark">✓</span></div><span>水着</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ===== DISNEY MODE ===== -->
-        <div class="pane" id="pane-disney">
-          <div class="dtabs">
-            <button class="dtab active" onclick="showDisney(0)">DAY 1<br><small>DCA</small></button>
-            <button class="dtab" onclick="showDisney(1)">DAY 2<br><small>DLP</small></button>
-            <button class="dtab" onclick="showDisney(2)">予約</button>
-            <button class="dtab" onclick="showDisney(3)">Tips</button>
-          </div>
-
-          <div class="card active" id="d0">
-            <div class="d-hdr dca">
-              <h2>Disney California Adventure</h2>
-              <p>4月30日（木）· 人気アトラクション制覇＋夜のショー</p>
-            </div>
-
-            <div class="section-hdr">朝</div>
-            <div class="ev-block"><div class="ev-time">7:45</div><div class="ev-title">入園待機</div><div class="ev-desc">開園15分前に並ぶ。早い列確保が鍵！</div></div>
-            <div class="ev-block"><div class="ev-time">8:00</div><div class="ev-title">入園！</div><div class="ev-desc">開園と同時に Radiator Springs Racers へダッシュ！</div></div>
-            <div class="ev-block"><div class="ev-time">8:05</div><div class="ev-title">Radiator Springs Racers</div><div class="ev-desc">カーズの世界でレースする車型ライド。昼は120分待ちになることも。</div><div class="ev-tags"><span class="tag tag-warn">昼は120分待ち</span><span class="tag tag-tip">シングルライダーあり</span></div></div>
-            <div class="ev-block"><div class="ev-time">8:40</div><div class="ev-title">WEB SLINGERS: A Spider-Man Adventure</div><div class="ev-desc">手を動かして蜘蛛の糸を撃つゲーム型シューティングライド。</div></div>
-            <div class="ev-block"><div class="ev-time">9:10</div><div class="ev-title">Guardians of the Galaxy – Mission: Breakout!</div><div class="ev-desc">マーベル版タワーオブテラー。急上昇・急落下の絶叫系。</div><div class="ev-tags"><span class="tag tag-warn">絶叫系</span></div></div>
-            <div class="ev-block"><div class="ev-time">9:40</div><div class="ev-title">Incredicoaster</div><div class="ev-desc">ディズニー最速コースター。時速88kmの絶叫ジェットコースター。</div><div class="ev-tags"><span class="tag tag-warn">時速88km</span><span class="tag tag-tip">シングルライダーあり</span></div></div>
-            <div class="ev-block"><div class="ev-time">10:15</div><div class="ev-title">Toy Story Midway Mania!</div><div class="ev-desc">シューティングゲーム型ライド。得点を競う系。</div></div>
-            <div class="ev-block"><div class="ev-time">10:45</div><div class="ev-title">Soarin' Around the World</div><div class="ev-desc">世界を飛ぶ巨大スクリーンの空中飛行ライド。映像・風・香りまで体感。</div><div class="ev-tags"><span class="tag tag-star">おすすめ</span></div></div>
-
-            <div class="section-hdr">昼</div>
-            <div class="ev-block food"><div class="ev-time">12:00</div><div class="ev-title">昼食 — Pym Test Kitchen</div><div class="ev-desc">アベンジャーズキャンパスの人気レストラン。巨大ハンバーガーが有名。</div><div class="ev-tags"><span class="tag tag-star">映えスポット</span></div></div>
-
-            <div class="section-hdr">午後</div>
-            <div class="ev-block"><div class="ev-time">13:00</div><div class="ev-title">Grizzly River Run</div><div class="ev-desc">急流下りライド。かなり濡れます。レインコートか着替えを準備。</div><div class="ev-tags"><span class="tag tag-warn">かなり濡れる</span></div></div>
-            <div class="ev-block show"><div class="ev-time">14:00</div><div class="ev-title">Cars Land 散策</div><div class="ev-desc">ルート66の世界観を再現した超ハイクオリティなエリア。写真を撮りまくろう。</div></div>
-            <div class="ev-block show"><div class="ev-time">15:30</div><div class="ev-title">カフェ休憩</div><div class="ev-desc">夜のショーに向けて体力温存。スナックやドリンクでひと息。</div></div>
-
-            <div class="section-hdr">夜</div>
-            <div class="ev-block show"><div class="ev-time">18:30</div><div class="ev-title">Cars Land 夜景</div><div class="ev-desc">ネオンサインのライトアップが圧巻。昼とは全然違う幻想的な世界。</div><div class="ev-tags"><span class="tag tag-star">インスタ映え</span></div></div>
-            <div class="ev-block special"><div class="ev-time">21:00</div><div class="ev-title">World of Color</div><div class="ev-desc">水・炎・映像の巨大ナイトショー。湖面に投影される映像は必見。早めに場所取りを。</div><div class="ev-tags"><span class="tag tag-warn">場所取り早めに</span><span class="tag tag-star">Day 1ハイライト</span></div></div>
-          </div>
-
-          <div class="card" id="d1">
-            <div class="d-hdr sw">
-              <h2>Disneyland Park</h2>
-              <p>5月1日（金）· スターウォーズ完全攻略</p>
-            </div>
-
-            <div class="section-hdr">朝</div>
-            <div class="ev-block"><div class="ev-time">7:45</div><div class="ev-title">入園待機</div><div class="ev-desc">開園15分前に並ぶ。Rise of the Resistanceは開園ダッシュが命！</div></div>
-            <div class="ev-block"><div class="ev-time">8:00</div><div class="ev-title">入園！</div><div class="ev-desc">開園と同時に Galaxy's Edge へダッシュ！</div></div>
-            <div class="ev-block sw"><div class="ev-time">8:05</div><div class="ev-title">Star Wars: Rise of the Resistance</div><div class="ev-desc">スターウォーズの世界に完全没入する超巨大ライド。ディズニー最高傑作との声も。</div><div class="ev-tags"><span class="tag tag-sw">ディズニー最高傑作</span><span class="tag tag-warn">開園ダッシュ必須</span></div></div>
-            <div class="ev-block sw"><div class="ev-time">8:40</div><div class="ev-title">Millennium Falcon: Smugglers Run</div><div class="ev-desc">ミレニアムファルコンを操縦する体験型ライド。役割分担が楽しい。</div><div class="ev-tags"><span class="tag tag-tip">シングルライダーあり</span></div></div>
-            <div class="ev-block sw"><div class="ev-time">9:10</div><div class="ev-title">Star Tours – The Adventures Continue</div><div class="ev-desc">スターウォーズの宇宙旅行3Dフライトライド。シーンがランダムで毎回違う体験。</div></div>
-
-            <div class="section-hdr">午前</div>
-            <div class="ev-block"><div class="ev-time">10:00</div><div class="ev-title">Indiana Jones Adventure</div><div class="ev-desc">ジープで遺跡探検。かなり激しい揺れのアトラクション。</div><div class="ev-tags"><span class="tag tag-warn">激しい揺れあり</span></div></div>
-            <div class="ev-block"><div class="ev-time">10:40</div><div class="ev-title">Space Mountain</div><div class="ev-desc">宇宙の暗闇を駆け抜けるジェットコースター。ディズニーの定番名作。</div></div>
-            <div class="ev-block"><div class="ev-time">11:20</div><div class="ev-title">Big Thunder Mountain Railroad</div><div class="ev-desc">鉱山トロッココースター。スリルはほどほどで楽しい。</div></div>
-
-            <div class="section-hdr">昼</div>
-            <div class="ev-block food sw"><div class="ev-time">12:00</div><div class="ev-title">昼食 — Ronto Roasters</div><div class="ev-desc">Galaxy's Edge内の人気スナックスタンド。スターウォーズの宇宙ホットドッグが絶品。</div><div class="ev-tags"><span class="tag tag-sw">SW体験グルメ</span></div></div>
-
-            <div class="section-hdr">午後</div>
-            <div class="ev-block"><div class="ev-time">13:00</div><div class="ev-title">Pirates of the Caribbean</div><div class="ev-desc">カリブの海賊ライド。映画の元ネタ。暗くて涼しくて雰囲気最高。</div><div class="ev-tags"><span class="tag tag-star">ディズニー名作</span></div></div>
-            <div class="ev-block"><div class="ev-time">13:40</div><div class="ev-title">Haunted Mansion</div><div class="ev-desc">幽霊屋敷ライド。怖いというよりユーモアたっぷり。ディズニーの隠れ名作。</div><div class="ev-tags"><span class="tag tag-star">ディズニー名作</span></div></div>
-            <div class="ev-block"><div class="ev-time">14:30</div><div class="ev-title">Tiana's Bayou Adventure</div><div class="ev-desc">丸太ボートで急流下り。最後に大きな落下あり。濡れる可能性あり。</div><div class="ev-tags"><span class="tag tag-warn">濡れる可能性あり</span></div></div>
-
-            <div class="section-hdr">SW 裏体験</div>
-            <div class="ev-block sw"><div class="ev-time"></div><div class="ev-title">Batuu Bounty Hunters（無料）</div><div class="ev-desc">Disney アプリ → Play Disney Parks → Batuu Bounty Hunters。Galaxy's Edge 内のドアを探すゲーム。成功すると壁が光る！（約15分）</div><div class="ev-tags"><span class="tag tag-sw">隠し体験</span></div></div>
-            <div class="ev-block sw"><div class="ev-time"></div><div class="ev-title">キャスト秘密ミッション</div><div class="ev-desc">Galaxy's Edge でキャストに話しかけ＋ライトセーバーを持つ。レジスタンスの秘密ミッションが始まることも！</div><div class="ev-tags"><span class="tag tag-sw">超隠し体験</span></div></div>
-
-            <div class="section-hdr">夕方</div>
-            <div class="ev-block sw"><div class="ev-time">17:30</div><div class="ev-title">Oga's Cantina</div><div class="ev-desc">スターウォーズの宇宙酒場。宇宙カクテルを楽しめる。当日アプリのウォークアップリストで挑戦！</div><div class="ev-tags"><span class="tag tag-sw">宇宙カクテル</span><span class="tag tag-warn">当日アプリで並ぶ</span></div></div>
-
-            <div class="section-hdr">夜</div>
-            <div class="ev-block special"><div class="ev-time">20:25</div><div class="ev-title">Savi's Workshop – Handbuilt Lightsabers</div><div class="ev-desc">自分だけのライトセーバーを作る体験。スターウォーズ最高体験。予約済み！</div><div class="ev-tags"><span class="tag tag-res">予約済み</span><span class="tag tag-star">Day 2ハイライト</span></div></div>
-            <div class="ev-block show"><div class="ev-time">21:00</div><div class="ev-title">ライトセーバー夜写真</div><div class="ev-desc">作ったばかりのライトセーバーで Galaxy's Edge の夜景をバックに記念撮影！</div><div class="ev-tags"><span class="tag tag-star">最高の思い出</span></div></div>
-          </div>
-
-          <div class="card" id="d2">
-            <div class="d-hdr dlp">
-              <h2>予約・チェックリスト</h2>
-              <p>旅行前に確認しよう</p>
-            </div>
-
-            <div class="res-item"><div class="res-top"><span class="res-icon">🎡</span><span class="res-name">パーク予約</span><span class="res-status st-done">完了</span></div><div class="res-sub">TAKASHI ＆ KAZUYUKI<br>4/30 → Disney California Adventure<br>5/1 → Disneyland Park</div><span class="res-free">無料</span></div>
-            <div class="res-item"><div class="res-top"><span class="res-icon">⚔️</span><span class="res-name">Savi's Workshop</span><span class="res-status st-done">予約済み</span></div><div class="res-sub">ライトセーバー制作体験（約20分）<br>5/1 20:25〜 · 10分前チェックイン</div><span class="res-price">$249.99〜 / 人（税別）</span></div>
-            <div class="res-item"><div class="res-top"><span class="res-icon">🍽️</span><span class="res-name">Blue Bayou Restaurant</span><span class="res-status st-todo">要確認</span></div><div class="res-sub">ディズニー人気No.1レストラン。<br>5月4日にクローズ予定のため5/1がラストチャンス！</div><span class="res-price">有料（食事代）</span></div>
-            <div class="res-item"><div class="res-top"><span class="res-icon">🍹</span><span class="res-name">Oga's Cantina</span><span class="res-status st-day">当日対応</span></div><div class="res-sub">予約廃止 → 当日Disneyアプリのウォークアップリストで挑戦。朝早めにリストに入ることを推奨。</div><span class="res-price">有料（飲み物代）</span></div>
-            <div class="res-item"><div class="res-top"><span class="res-icon">💳</span><span class="res-name">Disney Dining Card</span><span class="res-status st-todo">事前購入推奨</span></div><div class="res-sub">パーク内の飲食店専用カード。最大3枚まで購入可能。<br>2人2日の食費目安：$280〜$360</div><span class="res-price">$90 × 3枚 = $270 推奨</span></div>
-            <div class="res-item"><div class="res-top"><span class="res-icon">⚡</span><span class="res-name">Lightning Lane Multi Pass</span><span class="res-status st-day">当日購入</span></div><div class="res-sub">人気アトラクションの待ち時間を大幅短縮。開園当日にアプリから購入。</div><span class="res-price">$34〜 / 人 / 日</span></div>
-          </div>
-
-          <div class="card" id="d3">
-            <div class="d-hdr dca">
-              <h2>重要 Tips</h2>
-              <p>知っておくと得する情報</p>
-            </div>
-
-            <div class="tip-block">
-              <div class="tip-title">シングルライダーを使え！</div>
-              <div class="tip-body">
-                アナハイムはシングルライダーを使うと待ち時間が激減する。
-                <table class="sr-table">
-                  <tr><th>アトラクション</th><th>通常</th><th>シングル</th></tr>
-                  <tr><td>Radiator Springs Racers</td><td class="wait-long">60〜120分</td><td class="wait-short">5〜15分</td></tr>
-                  <tr><td>Incredicoaster</td><td class="wait-long">40〜60分</td><td class="wait-short">5〜10分</td></tr>
-                  <tr><td>Millennium Falcon</td><td class="wait-long">45〜90分</td><td class="wait-short">10〜20分</td></tr>
-                </table>
-              </div>
-            </div>
-
-            <div class="tip-block"><div class="tip-title">Lightning Lane の使い方</div><div class="tip-body">開園当日にアプリから購入（$34〜/人/日）。超人気アトラクションはIndividual Lightning Lane（別料金）が必要な場合も。開園直後に予約を取るのが鉄則。</div></div>
-            <div class="tip-block"><div class="tip-title">Disney アプリの準備</div><div class="tip-body">事前にインストール＆ログイン必須。待ち時間確認・モバイルオーダー・Lightning Lane予約・バウンティハンターゲームなど全部アプリで完結。</div></div>
-            <div class="tip-block"><div class="tip-title">濡れる系アトラクション対策</div><div class="tip-body">Grizzly River Run（DCA）とTiana's Bayou Adventure（DLP）はかなり濡れる。コンビニ袋または使い捨てレインコートを準備しておくと安心。</div></div>
-            <div class="tip-block"><div class="tip-title">モバイルオーダーを活用</div><div class="tip-body">人気レストランはアプリのモバイルオーダーを使えば並ばずにご飯をゲット。Pym Test Kitchen・Ronto Roastersなどはぜひ活用しよう。</div></div>
-
-            <div class="tip-block">
-              <div class="tip-title">入場前チェックリスト</div>
-              <div class="tip-body">
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>チケット（アプリまたはメール確認）</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>パーク予約（確認番号を控える）</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>Savi's Workshop 予約確認</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>Disney アプリ ログイン済み</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>ダイニングカード 購入済み</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>動きやすい靴で来る</span></div>
-                <div class="chk-item" onclick="tgl(this)" style="font-size:14px;padding:6px 0;"><div class="chkbox"><span class="chkmark">✓</span></div><span>モバイルバッテリー持参</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function switchMode(m){
-      document.getElementById('pane-trip').classList.toggle('active',m==='trip');
-      document.getElementById('pane-disney').classList.toggle('active',m==='disney');
-      document.querySelectorAll('.mode-btn').forEach((b,i)=>
-        b.classList.toggle('active',(m==='trip'&&i===0)||(m==='disney'&&i===1))
-      );
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function showTrip(n){
-      document.querySelectorAll('#pane-trip .card').forEach((c,i)=>c.classList.toggle('active',i===n));
-      document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function showDisney(n){
-      document.querySelectorAll('#pane-disney .card').forEach((c,i)=>c.classList.toggle('active',i===n));
-      document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('active',i===n));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function tgl(el){
-      const b = el.querySelector('.chkbox');
-      const s = el.querySelector('span:last-child');
-      b.classList.toggle('on');
-      s.classList.toggle('done');
-    }
-  </script>
 </body>
 </html>
